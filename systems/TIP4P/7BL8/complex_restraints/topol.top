@@ -1,0 +1,80 @@
+
+
+; Include forcefield parameters
+#include "../../../../forcefield/amber14sb.ff/forcefield.itp"
+
+
+[ atomtypes ]
+; name    at.num    mass    charge ptype  sigma      epsilon
+c3             6  12.010000  0.00000000  A     0.33977095      0.4510352
+cc             6  12.010000  0.00000000  A     0.33152123      0.4133792
+cd             6  12.010000  0.00000000  A     0.33152123      0.4133792
+ca             6  12.010000  0.00000000  A     0.33152123      0.4133792
+cg             6  12.010000  0.00000000  A     0.34789595      0.6677664
+na             7  14.010000  0.00000000  A     0.32058099      0.8543728
+nd             7  14.010000  0.00000000  A     0.33841679      0.3937144
+nc             7  14.010000  0.00000000  A     0.33841679      0.3937144
+n1             7  14.010000  0.00000000  A     0.32735182      0.4594032
+h1             1   1.008000  0.00000000  A     0.24219973      0.0870272
+h4             1   1.008000  0.00000000  A     0.25363887      0.0673624
+hc             1   1.008000  0.00000000  A      0.2600177      0.0870272
+h5             1   1.008000  0.00000000  A     0.24472988      0.0673624
+ha             1   1.008000  0.00000000  A     0.26254785      0.0673624
+
+
+; Include protein topology
+#include "protein.itp"
+
+; Include protein restraint file
+#ifdef POSRES
+#include "posre_protein.itp"
+#endif
+
+; Include ligand topology
+#include "ligand.itp"
+
+; Include ligand restraint file
+#ifdef POSRES
+#include "posre_ligand.itp"
+#endif
+
+; Include water topology
+#include "../../../../forcefield/amber14sb.ff/tip4p.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+#include "../../../../forcefield/amber14sb.ff/ions.itp"
+
+
+[ system ]
+; Name
+Protein in water
+
+[ molecules ]
+; Compound        #mols
+Protein     1
+LIG 	1
+SOL         11334
+NA               34
+CL               26
+
+
+; restraints
+[ intermolecular_interactions ]
+[ bonds ]
+;    ai   aj    type  bA         kA       bB    kB
+  1694   358    6     0.391      0.0    0.391   4184.00
+[ angles ]
+;   ai    aj    ak    type    thA      fcA      thB       fcB
+  1693  1694   358       1   112.045    0.0   112.045     41.84
+  1694   358   348       1   117.997    0.0   117.997     41.84
+[ dihedrals ]
+;   ai    aj    ak    al  type    phiA      fcA    phiB      fcB
+  1692  1693  1694   358     2    -76.364    0.0    -76.364    41.84
+  1693  1694   358   348     2    -171.473    0.0    -171.473    41.84
+  1694   358   348   346     2     4.912    0.0     4.912    41.84

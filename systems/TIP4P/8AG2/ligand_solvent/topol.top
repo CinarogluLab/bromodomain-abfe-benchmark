@@ -1,0 +1,64 @@
+
+
+; Include forcefield parameters
+#include "../../../../forcefield/amber14sb.ff/forcefield.itp"
+
+
+[ atomtypes ]
+; name    at.num    mass    charge ptype  sigma      epsilon
+ca             6  12.010000  0.00000000  A     0.33152123      0.4133792
+c3             6  12.010000  0.00000000  A     0.33977095      0.4510352
+cc             6  12.010000  0.00000000  A     0.33152123      0.4133792
+c              6  12.010000  0.00000000  A     0.33152123      0.4133792
+cd             6  12.010000  0.00000000  A     0.33152123      0.4133792
+cx             6  12.010000  0.00000000  A     0.33977095      0.4510352
+n3             7  14.010000  0.00000000  A     0.33651026      0.3589872
+nx             7  14.010000  0.00000000  A     0.25885953      10.649535
+n              7  14.010000  0.00000000  A     0.31808648      0.6845024
+o              8  16.000000  0.00000000  A     0.30481209      0.6121192
+os             8  16.000000  0.00000000  A     0.31560978      0.3037584
+ha             1   1.008000  0.00000000  A     0.26254785      0.0673624
+h1             1   1.008000  0.00000000  A     0.24219973      0.0870272
+h4             1   1.008000  0.00000000  A     0.25363887      0.0673624
+hc             1   1.008000  0.00000000  A      0.2600177      0.0870272
+hx             1   1.008000  0.00000000  A      0.1887458      0.0870272
+hn             1   1.008000  0.00000000  A     0.11064962        0.04184
+
+#include "../../../../forcefield/amber14sb.ff/waters/itp/atomtypes_waters.itp"
+
+
+; Include ligand topology
+#include "ligand.itp"
+
+; Include ligand restraint file
+#ifdef POSRES
+#include "posre_ligand.itp"
+#endif
+
+
+#include "../../../../forcefield/amber14sb.ff/ions.itp"
+
+
+; Include water topology
+#include "../../../../forcefield/amber14sb.ff/tip4p.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+
+[ system ]
+; Name
+Protein in water
+
+[ molecules ]
+; Compound        #mols
+LIG 	1
+NA               7
+CL               7
+SOL         4501
+
+
