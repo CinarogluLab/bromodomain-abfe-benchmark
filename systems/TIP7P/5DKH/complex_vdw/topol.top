@@ -1,0 +1,88 @@
+
+
+; Include forcefield parameters
+#include "../../../../forcefield/amber14sb.ff/forcefield.itp"
+
+
+[ atomtypes ]
+; name    at.num    mass    charge ptype  sigma      epsilon
+ca             6  12.010000  0.00000000  A     0.33152123      0.4133792
+c6             6  12.010000  0.00000000  A     0.33977095      0.4510352
+c5             6  12.010000  0.00000000  A     0.33977095      0.4510352
+nb             7  14.010000  0.00000000  A     0.33841679      0.3937144
+c2             6  12.010000  0.00000000  A     0.33152123      0.4133792
+nh             7  14.010000  0.00000000  A      0.3189952        0.89956
+ce             6  12.010000  0.00000000  A     0.33152123      0.4133792
+c              6  12.010000  0.00000000  A     0.33152123      0.4133792
+o              8  16.000000  0.00000000  A     0.30481209      0.6121192
+oh             8  16.000000  0.00000000  A     0.32428713       0.389112
+nu             7  14.010000  0.00000000  A     0.32790418       0.646428
+cx             6  12.010000  0.00000000  A     0.33977095      0.4510352
+hc             1   1.008000  0.00000000  A      0.2600177      0.0870272
+h1             1   1.008000  0.00000000  A     0.24219973      0.0870272
+h5             1   1.008000  0.00000000  A     0.24472988      0.0673624
+h4             1   1.008000  0.00000000  A     0.25363887      0.0673624
+ha             1   1.008000  0.00000000  A     0.26254785      0.0673624
+hn             1   1.008000  0.00000000  A     0.11064962        0.04184
+ho             1   1.008000  0.00000000  A    0.053792465      0.0196648
+OW_tp7      OW_tp7         16.0000   0.11094  A      0.31560       0.62857
+HW_tp7      HW_tp7         1.00800   0.58014  A      0.14476       0.010605
+MW_tp7      MW_tp7         0.0000   -0.45837  D      0.0000       0.00000
+LP_tp7      LP_tp7         0.0000   -0.17724  D      0.0000       0.00000
+
+
+; Include protein topology
+#include "protein.itp"
+
+; Include protein restraint file
+#ifdef POSRES
+#include "posre_protein.itp"
+#endif
+
+; Include ligand topology
+#include "ligand.itp"
+
+; Include ligand restraint file
+#ifdef POSRES
+#include "posre_ligand.itp"
+#endif
+
+; Include water topology
+#include "TIP7P.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+#include "../../../../forcefield/amber14sb.ff/ions.itp"
+
+[ system ]
+; Name
+Protein in water
+
+[ molecules ]
+; Compound        #mols
+Protein     1
+LIG 	1
+TP7         13995
+NA               29
+CL               26
+
+
+; restraints
+[ intermolecular_interactions ]
+[ bonds ]
+;    ai   aj    type  bA         kA       bB    kB
+  1959  1417    6     0.513      0.0    0.513   4184.00
+[ angles ]
+;   ai    aj    ak    type    thA      fcA      thB       fcB
+  1961  1959  1417       1   58.187    0.0   58.187     41.84
+  1959  1417  1415       1   100.125    0.0   100.125     41.84
+[ dihedrals ]
+;   ai    aj    ak    al  type    phiA      fcA    phiB      fcB
+  1962  1961  1959  1417     2    -32.082    0.0    -32.082    41.84
+  1961  1959  1417  1415     2    16.980    0.0    16.980    41.84
+  1959  1417  1415  1413     2    94.126    0.0    94.126    41.84

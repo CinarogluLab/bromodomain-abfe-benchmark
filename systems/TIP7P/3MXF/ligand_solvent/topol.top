@@ -1,0 +1,60 @@
+
+
+; Include forcefield parameters
+#include "../../../../forcefield/amber14sb.ff/forcefield.itp"
+
+
+[ atomtypes ]
+; name    at.num    mass    charge ptype  sigma      epsilon
+c3             6  12.010000  0.00000000  A     0.33977095      0.4510352
+o              8  16.000000  0.00000000  A     0.30481209      0.6121192
+cl            17  35.450000  0.00000000  A     0.34659524      1.1037392
+ca             6  12.010000  0.00000000  A     0.33152123      0.4133792
+n2             7  14.010000  0.00000000  A     0.33841679      0.3937144
+nc             7  14.010000  0.00000000  A     0.33841679      0.3937144
+os             8  16.000000  0.00000000  A     0.31560978      0.3037584
+ss            16  32.060000  0.00000000  A     0.35324134      1.1815616
+c              6  12.010000  0.00000000  A     0.33152123      0.4133792
+ce             6  12.010000  0.00000000  A     0.33152123      0.4133792
+cd             6  12.010000  0.00000000  A     0.33152123      0.4133792
+cc             6  12.010000  0.00000000  A     0.33152123      0.4133792
+na             7  14.010000  0.00000000  A     0.32058099      0.8543728
+hc             1   1.008000  0.00000000  A      0.2600177      0.0870272
+ha             1   1.008000  0.00000000  A     0.26254785      0.0673624
+h1             1   1.008000  0.00000000  A     0.24219973      0.0870272
+OW_tp7      OW_tp7         16.0000   0.11094  A      0.31560       0.62857
+HW_tp7      HW_tp7         1.00800   0.58014  A      0.14476       0.010605
+MW_tp7      MW_tp7         0.0000   -0.45837  D      0.0000       0.00000
+LP_tp7      LP_tp7         0.0000   -0.17724  D      0.0000       0.00000
+
+
+; Include ligand topology
+#include "ligand.itp"
+
+; Include ligand restraint file
+#ifdef POSRES
+#include "posre_ligand.itp"
+#endif
+
+; Include water topology
+#include "TIP7P.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+#include "../../../../forcefield/amber14sb.ff/ions.itp"
+
+[ system ]
+; Name
+Protein in water
+
+[ molecules ]
+; Compound        #mols
+LIG 	1
+NA               7
+CL               7
+TP7         4201
