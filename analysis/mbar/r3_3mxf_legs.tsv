@@ -1,0 +1,2 @@
+model	pdb	leg	n_states	expected	missing	short	multi_copy	dG	err	dG_mbar_all	dG_ti	dG_first_half	dG_second_half	min_neff	min_neff_state
+TIP3P	3MXF	vdw	21	21			1	3.798574128593749	0.227317187181181	3.822877155771768	3.907791549446387	3.8966149934984173	3.7028089872500987	29	17

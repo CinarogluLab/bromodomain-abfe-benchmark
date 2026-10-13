@@ -1,0 +1,11 @@
+pdb	smiles_as_used_for_fingerprints
+8AG2	COc1cc(ccc1C2(CC2)N3CCN(C)CC3)C4=CN(C)C(=O)C(=C4C)C
+7L9G	O=C5N(c1c(nc(nc1)Nc3ccc(C(=O)NC2CCN(C)CC2)cc3OC)N(C4CCCC4)C5CC)C
+3MXF	Cc1c(sc-2c1C(=NC(c3[n+]2c(n[nH]3)C)CC(=O)OC(C)(C)C)c4ccc(cc4)Cl)C
+5I8G	C5C(C)Nc4c(cccc4c2ccc1n(nc(c1c2)c3cnn(c3)C)C)NC5=O
+5LJ0	CO[CH]1CNC[CH](OCC2CCC(F)(F)CC2)[CH]1Nc3ncc(c4cncc(C)c4)c5C=C(C)C(=O)Nc35
+6V1B	CCN1C=C(c2cccc(c2)C(F)(F)F)c3sc(cc3C1=O)C(N)=NC4CC[S](=O)(=O)CC4
+7BL8	Cn1cc(CCn2cnc(c3cnn(C)c3)c2c4ccc(cc4)C#N)cn1
+4ZQL	COc1cc(ccc1OC)S(=O)(Nc3cc2c(N(C(N2C)=O)C)cc3Oc4ccc(OC)cc4)=O
+5IGL	c1(ccc(C)c(c1)NS(=O)(C)=O)c2nn3c(c(NC(OCC)=O)c2)nnc3C
+5DKH	c31c(ncnc1NC2CC2)C4CCC(C3)N4[C@H]=CC(=O)c5c(O)cccc5
