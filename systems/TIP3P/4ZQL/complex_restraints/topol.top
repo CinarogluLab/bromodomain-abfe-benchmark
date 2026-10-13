@@ -1,0 +1,89 @@
+
+
+; Include forcefield parameters
+#include "../../../../forcefield/amber14sb.ff/forcefield.itp"
+
+
+[ atomtypes ]
+; name    at.num    mass    charge ptype  sigma      epsilon
+c3             6  12.010000  0.00000000  A     0.33977095      0.4510352
+os             8  16.000000  0.00000000  A     0.31560978      0.3037584
+ca             6  12.010000  0.00000000  A     0.33152123      0.4133792
+sy            16  32.060000  0.00000000  A        0.40584      0.2568976
+o              8  16.000000  0.00000000  A     0.30481209      0.6121192
+nu             7  14.010000  0.00000000  A     0.32499985        0.71128
+n              7  14.010000  0.00000000  A     0.31808648      0.6845024
+c              6  12.010000  0.00000000  A     0.33152123      0.4133792
+h1             1   1.008000  0.00000000  A     0.24219973      0.0870272
+ha             1   1.008000  0.00000000  A     0.26254785      0.0673624
+hn             1   1.008000  0.00000000  A     0.11064962        0.04184
+
+#include "../../../../forcefield/amber14sb.ff/waters/itp/atomtypes_waters.itp"
+
+; Include protein topology
+#include "protein.itp"
+
+; Include protein restraint file
+#ifdef POSRES
+#include "posre_protein.itp"
+#endif
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Include water topology
+#include "../../../../forcefield/amber14sb.ff/waters/itp/tip3p.itp"
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+#ifdef POSRES
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+; Include ligand topology
+#include "ligand.itp"
+
+; Include ligand restraint file
+#ifdef POSRES
+#include "posre_ligand.itp"
+#endif
+
+; Include water topology
+#include "../../../../forcefield/amber14sb.ff/tip3p.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+#include "../../../../forcefield/amber14sb.ff/ions.itp"
+
+[ system ]
+; Name
+Protein in water
+
+[ molecules ]
+; Compound        #mols
+Protein     			1
+TIP3P 					4			;;;;;;;;;;;;;; Water ;;;;;;;;;;;;;;
+LIG 					1
+SOL         12807
+NA               33
+CL               29
+
+; restraints
+[ intermolecular_interactions ]
+[ bonds ]
+;    ai   aj    type  bA         kA       bB    kB
+  1880   482    6     0.527      0.0    0.527   4184.00
+[ angles ]
+;   ai    aj    ak    type    thA      fcA      thB       fcB
+  1882  1880   482       1   78.238    0.0   78.238     41.84
+  1880   482   476       1   95.045    0.0   95.045     41.84
+[ dihedrals ]
+;   ai    aj    ak    al  type    phiA      fcA    phiB      fcB
+  1875  1882  1880   482     2    178.106    0.0    178.106    41.84
+  1882  1880   482   476     2    -63.324    0.0    -63.324    41.84
+  1880   482   476   474     2    -163.181    0.0    -163.181    41.84
