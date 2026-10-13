@@ -1,0 +1,83 @@
+
+
+; Include forcefield parameters
+#include "../../../../forcefield/amber14sb.ff/forcefield.itp"
+
+
+[ atomtypes ]
+; name    at.num    mass    charge ptype  sigma      epsilon
+c3             6  12.010000  0.00000000  A     0.33977095      0.4510352
+o              8  16.000000  0.00000000  A     0.30481209      0.6121192
+cl            17  35.450000  0.00000000  A     0.34659524      1.1037392
+ca             6  12.010000  0.00000000  A     0.33152123      0.4133792
+n2             7  14.010000  0.00000000  A     0.33841679      0.3937144
+nc             7  14.010000  0.00000000  A     0.33841679      0.3937144
+os             8  16.000000  0.00000000  A     0.31560978      0.3037584
+ss            16  32.060000  0.00000000  A     0.35324134      1.1815616
+c              6  12.010000  0.00000000  A     0.33152123      0.4133792
+ce             6  12.010000  0.00000000  A     0.33152123      0.4133792
+cd             6  12.010000  0.00000000  A     0.33152123      0.4133792
+cc             6  12.010000  0.00000000  A     0.33152123      0.4133792
+na             7  14.010000  0.00000000  A     0.32058099      0.8543728
+hc             1   1.008000  0.00000000  A      0.2600177      0.0870272
+ha             1   1.008000  0.00000000  A     0.26254785      0.0673624
+h1             1   1.008000  0.00000000  A     0.24219973      0.0870272
+
+
+; Include protein topology
+#include "protein.itp"
+
+; Include protein restraint file
+#ifdef POSRES
+#include "posre_protein.itp"
+#endif
+
+
+; Include ligand topology
+#include "ligand.itp"
+
+; Include ligand restraint file
+#ifdef POSRES
+#include "posre_ligand.itp"
+#endif
+
+#include "../../../../forcefield/amber14sb.ff/ions.itp"
+
+; Include water topology
+#include "../../../../forcefield/amber14sb.ff/tip5p.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+
+[ system ]
+; Name
+Protein in water
+
+[ molecules ]
+; Compound        #mols
+Protein     1
+LIG 	1
+NA               38
+CL               40
+SOL             10219
+
+
+; restraints
+[ intermolecular_interactions ]
+[ bonds ]
+;    ai   aj    type  bA         kA       bB    kB
+  1986   536    6     0.608      0.0    0.608   4184.00
+[ angles ]
+;   ai    aj    ak    type    thA      fcA      thB       fcB
+  1988  1986   536       1   99.148    0.0   99.148     41.84
+  1986   536   534       1   45.804    0.0   45.804     41.84
+[ dihedrals ]
+;   ai    aj    ak    al  type    phiA      fcA    phiB      fcB
+  1981  1988  1986   536     2    -134.604    0.0    -134.604    41.84
+  1988  1986   536   534     2    122.758    0.0    122.758    41.84
+  1986   536   534   524     2    -178.839    0.0    -178.839    41.84
